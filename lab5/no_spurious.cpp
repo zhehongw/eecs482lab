@@ -32,6 +32,5 @@ void newcv::signal(){
 		q.front()->signalled = true;
 		q.pop()
 	}
-	w.signal();
 	internal_mutex.unlock();
 }
