@@ -27,7 +27,7 @@ int send_message(const char *hostname, int port, const char *message) {
 	// TODO: Implement the rest of this function
 
 	// (1) Create a socket
-
+	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	// (2) Create a sockaddr_in to specify remote host and port
 	struct sockaddr_in addr;
 	if(make_client_sockaddr(&addr, hostname, port) == -1) {
@@ -35,13 +35,13 @@ int send_message(const char *hostname, int port, const char *message) {
 	}
 
 	// (3) Connect to remote server
-	
+	connect(sockfd, (struct sockaddr_in*)&addr, sizeof(addr));
 	// (4) Send message to remote server
 
 	// (5) Wait for integer response
 
 	// (6) Close connection
-
+	close(sockfd);
 	return -1;
 }
 
