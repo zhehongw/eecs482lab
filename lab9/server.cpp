@@ -33,8 +33,8 @@ int handle_connection(int connectionfd) {
 	printf("Client %d says '%s'\n", connectionfd, message);
 
 	// (3) Send response code to client
-	int response = 42;
-	send(connectionfd, &response, sizeof(response), 0);
+	const char *response = "response from server, message is accepted";
+	send(connectionfd, response, sizeof(response), 0);
 	// (4) Close connection
 	close(connectionfd);
 
@@ -58,7 +58,7 @@ int run_server(int port, int queue_size) {
 	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	// (2) Set the "reuse port" socket option
 	int yesval = 1;
-	setsocketopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &yesval, sizeof(yesval));
+	setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &yesval, sizeof(yesval));
 	// (3) Create a sockaddr_in struct for the proper port and bind() to it.
 	struct sockaddr_in addr;
 	if (make_server_sockaddr(&addr, port) == -1) {
